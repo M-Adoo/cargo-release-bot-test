@@ -33,12 +33,6 @@ jobs:
           git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/M-Adoo/cargo-release-bot-test
           git config --global user.email "Adoo@outlook.com"
           git config --global user.name "Bot@Ribir"
-          git pull 
-          git checkout -b x 
-          git push --set-upstream origin x
-          git checkout main
-          git push
-          git push --tags
 
       - name: Run cargo release
         if: ${{ env.NEW_COMMIT_COUNT > 0 }}
