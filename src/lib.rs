@@ -1,3 +1,5 @@
+/// Test github_token permission
+///
 pub fn add(left: usize, right: usize) -> usize {
     left + right
 }
