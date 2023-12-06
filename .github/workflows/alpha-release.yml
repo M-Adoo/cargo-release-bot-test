@@ -50,15 +50,19 @@ jobs:
         id: changelog
         run: |
           {
-            echo 'CHANGELOG<<delimiter-for-changelog'
-            grep --color=never -zoP '(?:##)[\s\S]*(?=\s##[^#])' ./CHANGELOG.md \
-              || grep --color=never -zoP '(?:##)[\s\S]*(?=<!--)' ./CHANGELOG.md | sed -e '$a\'
+            echo 'CHANGELOG<<delimiter-for-changelog' 
+            (
+              grep -zoP '(?:## ${{ github.ref_name }})[\s\S]*(?=\s+##[^#])' ./CHANGELOG.md \
+              || grep -zoP '(?:## ${{ github.ref_name }})[\s\S]*(?=\s+<!--)' ./CHANGELOG.md
+            ) \
+              | grep -zoP '\n[\s\S]*(?=\n)' | grep -zoP '\S[\s\S]*' \
+              | grep -aP '[\s\S]*' | sed -e '$a\'
             echo 'delimiter-for-changelog'
-          } >> "$GITHUB_ENV"
+          } >> $GITHUB_ENV
       - name: Github release notes
         if: ${{ env.NEW_COMMIT_COUNT > 0 }}
         uses: ncipollo/release-action@v1
         with:
           prerelease: true
           body: ${{ env.CHANGELOG }}
-          tag: ${{github.ref_name}}
+          tag: ${{ github.ref_name }}

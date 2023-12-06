@@ -6,7 +6,7 @@ Please keep one empty line before and after all headers. (This is required for `
 
 There are 5 types of changes:
 
-- `Added` for new features.
+- `Features` for new features.
 - `Changed` for changes in existing functionality.
 - `Fixed` for any bug fixes.
 - `Documented` for any changes to the documentation.
@@ -15,7 +15,7 @@ There are 5 types of changes:
 And please only add new entries below the `Unreleased` header with the following format:
 
 ```
-**crate**: description of change ([#PR])
+**crate**: description of change #PR @contributor
 ```
 
 <!-- next-header -->
