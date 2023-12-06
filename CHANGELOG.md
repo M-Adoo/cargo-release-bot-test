@@ -22,4 +22,10 @@ And please only add new entries below the `Unreleased` header with the following
 
 ## @Unreleased - @ReleaseDate
 
+The first version of this crate.
+
+### Features
+
+- This is a test 
+
 <!-- next-url -->

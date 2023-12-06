@@ -4,12 +4,17 @@ on:
     - cron: "0 2 * * 2" # runs every tuesday at 00:00
 permissions:
   contents: write
-  # deployments: write
 name: "release weekly alpha version"
 jobs:
   release:
     runs-on: ubuntu-22.04
     steps:
+      - name: Exit if the branch is not main
+        run: |
+          if [[ "${{ github.ref }}" != "refs/heads/main" ]]; then
+            echo "Branch is not main, exiting."
+            exit 0
+          fi    
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Required to count the commits
@@ -34,9 +39,26 @@ jobs:
           git config --global user.email "Adoo@outlook.com"
           git config --global user.name "Bot@Ribir"
 
-      - name: Run cargo release
+      - name: Run cargo release to publish
         if: ${{ env.NEW_COMMIT_COUNT > 0 }}
         uses: actions-rs/cargo@v1
         with:
           command: release
-          args: alpha --execute --no-confirm  --no-publish
+          args: alpha --execute --no-publish --no-confirm
+      - name: Extract changelog
+        if: ${{ env.NEW_COMMIT_COUNT > 0 }}
+        id: changelog
+        run: |
+          {
+            echo 'CHANGELOG<<delimiter-for-changelog'
+            grep --color=never -zoP '(?:##)[\s\S]*(?=\s##[^#])' ./CHANGELOG.md \
+              || grep --color=never -zoP '(?:##)[\s\S]*(?=<!--)' ./CHANGELOG.md | sed -e '$a\'
+            echo 'delimiter-for-changelog'
+          } >> "$GITHUB_ENV"
+      - name: Github release notes
+        if: ${{ env.NEW_COMMIT_COUNT > 0 }}
+        uses: ncipollo/release-action@v1
+        with:
+          prerelease: true
+          body: ${{ env.CHANGELOG }}
+          tag: ${{github.ref_name}}
