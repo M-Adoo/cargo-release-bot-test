@@ -47,13 +47,15 @@ jobs:
           args: alpha --execute --no-publish --no-confirm
       - name: Extract changelog
         if: ${{ env.NEW_COMMIT_COUNT > 0 }}
-        id: changelog
         run: |
+          echo "TAG_NAME=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+          version=$(git describe --tags --abbrev=0 | grep -oP '(?<=v)\S*')
+          echo "VERSION=$version" >> $GITHUB_ENV
           {
             echo 'CHANGELOG<<delimiter-for-changelog' 
             (
-              grep -zoP '(?:## ${{ github.ref_name }})[\s\S]*(?=\s+##[^#])' ./CHANGELOG.md \
-              || grep -zoP '(?:## ${{ github.ref_name }})[\s\S]*(?=\s+<!--)' ./CHANGELOG.md
+              grep -zoP "(?:## \[${version}\])[\s\S]*(?=\s+##[^#])" ./CHANGELOG.md \
+              || grep -zoP "(?:## ${version})[\s\S]*(?=\s+<\!--)" ./CHANGELOG.md
             ) \
               | grep -zoP '\n[\s\S]*(?=\n)' | grep -zoP '\S[\s\S]*' \
               | grep -aP '[\s\S]*' | sed -e '$a\'
@@ -65,4 +67,4 @@ jobs:
         with:
           prerelease: true
           body: ${{ env.CHANGELOG }}
-          tag: ${{ github.ref_name }}
+          tag: ${{ env.TAG_NAME }}
