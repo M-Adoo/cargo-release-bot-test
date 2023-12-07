@@ -20,7 +20,9 @@ And please only add new entries below the `Unreleased` header with the following
 
 <!-- next-header -->
 
-## @Unreleased - @ReleaseDate
+## [@Unreleased] - @ReleaseDate
+
+## 0.1.1-alpha.8 - 2023-12-07
 
 The first version of this crate.
 
@@ -29,3 +31,4 @@ The first version of this crate.
 - This is a test 
 
 <!-- next-url -->
+[@Unreleased]: https://github.com/RibirX/Ribir/compare/v0.1.1-alpha.8...HEAD
