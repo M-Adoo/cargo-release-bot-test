@@ -22,9 +22,7 @@ And please only add new entries below the `Unreleased` header with the following
 
 ## [@Unreleased] - @ReleaseDate
 
-## [0.1.1-beta.1] - 2024-01-05
-
-## Fixed
+### Fixed
 
 - test beta release
 
