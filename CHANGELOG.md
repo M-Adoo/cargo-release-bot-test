@@ -26,9 +26,33 @@ And please only add new entries below the `Unreleased` header with the following
 
 ## [0.1.1-alpha.11] - 2023-12-26
 
+### FEATURES
+
+- use `rclog` to relase this crate
+
+### FIXES
+
+- 0.1.1-alpha.11 fixes
+
 ## [0.1.1-alpha.10] - 2023-12-19
 
+### FEATURES
+
+- 0.1.1-alpha.10 features
+
+### FIXES
+
+- 0.1.1-alpha.10 fixes
+
 ## [0.1.1-alpha.9] - 2023-12-12
+
+### FEATURES
+
+- 0.1.1-alpha.9 features
+
+### FIXES
+
+- 0.1.1-alpha.9 fixes
 
 ## 0.1.1-alpha.8 - 2023-12-07
 

@@ -1,70 +1,25 @@
-on:
-  workflow_dispatch: # allows manual triggering
-  schedule:
-    - cron: "0 2 * * 2" # runs every tuesday at 00:00
+name: "version release"
 permissions:
   contents: write
-name: "release weekly alpha version"
+on:
+  workflow_dispatch: # allows manual triggering
+    inputs:
+      level:
+        description: 'release version level'
+        required: true
+        default: 'alpha'
+        type: choice
+        options:
+        - alpha
+        - beta
+        - rc
+        - minor
+        - major
 jobs:
-  release:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Exit if the branch is not main
-        run: |
-          if [[ "${{ github.ref }}" != "refs/heads/main" ]]; then
-            echo "Branch is not main, exiting."
-            exit 0
-          fi    
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0 # Required to count the commits
-      - name: Get new commits
-        run: echo "NEW_COMMIT_COUNT=$(git log --oneline --since '1 week' | wc -l)" >> $GITHUB_ENV
-      - name: Install nightly toolchain
-        if: ${{ env.NEW_COMMIT_COUNT > 0 }}
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: nightly-2023-02-01
-          override: true
-      - name: Install cargo-release
-        if: ${{ env.NEW_COMMIT_COUNT > 0 }}
-        uses: taiki-e/install-action@v2
-        with:
-          tool: cargo-release
-      - name: git config
-        if: ${{ env.NEW_COMMIT_COUNT > 0 }}
-        run: |
-          git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/M-Adoo/cargo-release-bot-test
-          git config --global user.email "Adoo@outlook.com"
-          git config --global user.name "Bot@Ribir"
-
-      - name: Run cargo release to publish
-        if: ${{ env.NEW_COMMIT_COUNT > 0 }}
-        uses: actions-rs/cargo@v1
-        with:
-          command: release
-          args: alpha --execute --no-publish --no-confirm
-      - name: Extract changelog
-        if: ${{ env.NEW_COMMIT_COUNT > 0 }}
-        run: |
-          echo "TAG_NAME=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
-          version=$(git describe --tags --abbrev=0 | grep -oP '(?<=v)\S*')
-          echo "VERSION=$version" >> $GITHUB_ENV
-          {
-            echo 'CHANGELOG<<delimiter-for-changelog' 
-            (
-              grep -zoP "(?:## \[${version}\])[\s\S]*(?=\s+##[^#])" ./CHANGELOG.md \
-              || grep -zoP "(?:## ${version})[\s\S]*(?=\s+<\!--)" ./CHANGELOG.md
-            ) \
-              | grep -zoP '\n[\s\S]*(?=\n)' | grep -zoP '\S[\s\S]*' \
-              | grep -aP '[\s\S]*' | sed -e '$a\'
-            echo 'delimiter-for-changelog'
-          } >> $GITHUB_ENV
-      - name: Github release notes
-        if: ${{ env.NEW_COMMIT_COUNT > 0 }}
-        uses: ncipollo/release-action@v1
-        with:
-          prerelease: true
-          body: ${{ env.CHANGELOG }}
-          tag: ${{ env.TAG_NAME }}
+  call-workflow-passing-data:
+    uses: M-Adoo/rclog/.github/workflows/release-version.yml@feat/release-workflow
+    with:
+      level: ${{ github.event.inputs.level }}
+      ref: ${{ github.ref }}
+    
+      

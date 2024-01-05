@@ -1,4 +1,3 @@
 #!/bin/bash
 
-echo $PREV_VERSION, $NEW_VERSION, $DRY_RUN
-echo $@
+echo rclog -t $NEW_VERSION -p ./CHANGELOG.md merge
