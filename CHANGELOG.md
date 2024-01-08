@@ -22,6 +22,11 @@ And please only add new entries below the `Unreleased` header with the following
 
 ## [0.1.1](https://github.com/RibirX/Ribir/compare/v0.1.1-beta.1...v0.1.1) - 2024-01-08
 
+### Changed
+
+- remove dependencies.
+- test patch
+
 ### Fixed
 
 - test beta release

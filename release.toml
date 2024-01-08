@@ -6,3 +6,4 @@ pre-release-replacements = [
   {file="CHANGELOG.md", search="<!-- next-url -->", replace="<!-- next-url -->\n[@Unreleased]: https://github.com/RibirX/Ribir/compare/{{tag_name}}...HEAD", exactly=1, prerelease = true},
 ]
 pre-release-hook = ["./rclog_hook.sh"]
+publish = false
