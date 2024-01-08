@@ -18,12 +18,13 @@ on:
         - major
 jobs:
   call-workflow-passing-data:
-    uses: RibirX/rclog/.github/workflows/release-version.yml@main
+    uses: RibirX/rclog/.github/workflows/release-version.yml@feat/pvk
     with:
       level: ${{ github.event.inputs.level }}
       ref: ${{ github.ref }}
       merge_changelog: ${{ github.event.inputs.level == 'patch'|| github.event.inputs.level == 'minor' || github.event.inputs.level == 'major' }}
     secrets:
       CRATE_RELEASE_TOKEN: ${{ secrets.CRATE_RELEASE_TOKEN }}
+      DEPLOY_KEY: ${{ secrets.PVK }}
 
       
