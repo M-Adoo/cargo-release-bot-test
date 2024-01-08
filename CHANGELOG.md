@@ -18,12 +18,11 @@ And please only add new entries below the `Unreleased` header with the following
 
 <!-- next-header -->
 
-## [@Unreleased](https://github.com/RibirX/Ribir/compare/v0.2.1-alpha.1...HEAD) - @ReleaseDate
+## [@Unreleased](https://github.com/RibirX/Ribir/compare/v0.2.1-alpha.2...HEAD) - @ReleaseDate
+
+## [0.2.1-alpha.2](https://github.com/RibirX/Ribir/compare/v0.2.1-alpha.1...v0.2.1-alpha.2) - 2024-01-08
 
 - support publish on protected branch
-
-
-## [0.2.1-alpha.1](https://github.com/RibirX/Ribir/compare/v0.2.0...v0.2.1-alpha.1) - 2024-01-08
 
 ## [0.2.0](https://github.com/RibirX/Ribir/compare/v0.1.1...v0.2.0) - 2024-01-08
 
