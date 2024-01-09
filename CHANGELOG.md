@@ -18,11 +18,11 @@ And please only add new entries below the `Unreleased` header with the following
 
 <!-- next-header -->
 
-## [@Unreleased](https://github.com/RibirX/Ribir/compare/v0.3.0-beta.2...HEAD) - @ReleaseDate
+## [@Unreleased](https://github.com/RibirX/Ribir/compare/v0.3.0-beta.3...HEAD) - @ReleaseDate
+
+## [0.3.0-beta.3](https://github.com/RibirX/Ribir/compare/v0.3.0-beta.2...v0.3.0-beta.3) - 2024-01-09
 
 - try dev cycle
-
-## [0.3.0-beta.2](https://github.com/RibirX/Ribir/compare/v0.3.0-beta.1...v0.3.0-beta.2) - 2024-01-09
 
 - not a empty changelog
 
