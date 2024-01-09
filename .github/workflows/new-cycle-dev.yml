@@ -1,0 +1,51 @@
+on:
+  workflow_dispatch: # allows manual triggering
+permissions:
+  contents: write
+name: "Start a new cycle of development"
+
+jobs:
+  master_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: master branch check
+        if: github.ref != 'refs/heads/main'
+        run: |
+            echo "You should only start a new cycle of development from the master branch."
+            exit 1
+  release_beta:
+    needs: master_check
+    uses: RibirX/rclog/.github/workflows/release-version.yml@main
+    with:
+      level: 'beta'
+      ref: ${{ github.ref }}
+      merge_changelog: false
+    secrets:
+      CRATE_RELEASE_TOKEN: ${{ secrets.CRATE_RELEASE_TOKEN }}
+      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+  checkout_relase_branch:
+    needs: release_beta
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Required to count the commits
+          ssh-key: ${{secrets.DEPLOY_KEY}}
+      - name: Intasll semver tool
+        run: npm install --save semver
+      - name: new release branch
+        run: |
+          version=$(git describe --tags --abbrev=0 | grep -oP '(?<=v)\S*')
+          branch_version=$(semver $version -c | grep -oP '[0-9]+.[0-9]+')
+          branch_name=release-$branch_version.x
+
+          git checkout -b $branch_name
+          git push --set-upstream origin $branch_name
+          git checkout main
+          
+          # relase a empty new alpha version without tag and publish or any changelog update
+          cargo login ${{secrets.CRATE_RELEASE_TOKEN}}
+          new_alpha_version=$(semver $version -i minor)-alpha.0
+          echo "publish = false" > /tmp/$new_alpha_version.toml
+          echo "tag = false" > $new_alpha_version.toml  
+          cargo release $new_alpha_version --no-confirm -c /tmp/$new_alpha_version.toml
