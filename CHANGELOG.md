@@ -18,12 +18,13 @@ And please only add new entries below the `Unreleased` header with the following
 
 <!-- next-header -->
 
-## [@Unreleased](https://github.com/RibirX/Ribir/compare/v0.5.0-beta.1...HEAD) - @ReleaseDate
+## [@Unreleased](https://github.com/RibirX/Ribir/compare/v0.4.0-beta.1...HEAD) - @ReleaseDate
+
+## [0.4.0-beta.1](https://github.com/RibirX/Ribir/compare/v0.5.0-beta.1...v0.4.0-beta.1) - 2024-01-09
 
 ### Fixed
 
 - fix not pull before release alpha.0
-
 
 ## [0.5.0-beta.1](https://github.com/RibirX/Ribir/compare/v0.3.0-beta.3...v0.5.0-beta.1) - 2024-01-09
 
