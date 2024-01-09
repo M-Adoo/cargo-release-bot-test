@@ -30,7 +30,11 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Required to count the commits
-          ssh-key: ${{secrets.DEPLOY_KEY}}
+          ssh-key: ${{secrets.PVK}}
+      - name: Install cargo-release
+        uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-release
       - name: Intasll semver tool
         run: npm install -g semver
       - name: new release branch & alpha version
@@ -41,11 +45,13 @@ jobs:
 
           git checkout -b $branch_name
           git push --set-upstream origin $branch_name
-          git checkout main
-          
+
           # relase a empty new alpha version without tag and publish or any changelog update
+          git checkout main
           cargo login ${{secrets.CRATE_RELEASE_TOKEN}}
           new_alpha_version=$(semver $version -i minor)-alpha.0
-          echo "publish = false" > /tmp/$new_alpha_version.toml
-          echo "tag = false" > $new_alpha_version.toml  
-          cargo release $new_alpha_version --no-confirm -c /tmp/$new_alpha_version.toml
+          echo "publish = false" >> /tmp/$new_alpha_version.toml
+          echo "tag = false" >> /tmp/$new_alpha_version.toml
+          echo "pre-release-replacements = []" >> /tmp/$new_alpha_version.toml
+          echo 'pre-release-hook = ["echo", "no replace in alpha.0"]' >> /tmp/$new_alpha_version.toml
+          cargo release $new_alpha_version -x --no-confirm -c /tmp/$new_alpha_version.toml
