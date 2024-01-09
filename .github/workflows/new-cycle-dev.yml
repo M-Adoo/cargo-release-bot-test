@@ -22,7 +22,7 @@ jobs:
       merge_changelog: false
     secrets:
       CRATE_RELEASE_TOKEN: ${{ secrets.CRATE_RELEASE_TOKEN }}
-      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+      DEPLOY_KEY: ${{ secrets.PVK }}
   checkout_relase_branch:
     needs: release_beta
     runs-on: ubuntu-latest
