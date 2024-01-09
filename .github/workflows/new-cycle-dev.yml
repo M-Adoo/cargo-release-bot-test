@@ -33,7 +33,7 @@ jobs:
           ssh-key: ${{secrets.DEPLOY_KEY}}
       - name: Intasll semver tool
         run: npm install --save semver
-      - name: new release branch
+      - name: new release branch & alpha version
         run: |
           version=$(git describe --tags --abbrev=0 | grep -oP '(?<=v)\S*')
           branch_version=$(semver $version -c | grep -oP '[0-9]+.[0-9]+')
