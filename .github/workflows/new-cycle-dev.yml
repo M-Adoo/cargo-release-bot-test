@@ -39,9 +39,14 @@ jobs:
         run: npm install -g semver
       - name: new release branch & alpha version
         run: |
+          git config --global user.name "RChangelog[bot]"
+          git config --global user.email 155627257+RChangelog[bot]@users.noreply.github.com
+
+          # need a pull, release a beta version before
+          git pull --rebase
           version=$(git describe --tags --abbrev=0 | grep -oP '(?<=v)\S*')
-          branch_version=$(semver $version -c | grep -oP '[0-9]+.[0-9]+')
-          branch_name=release-$branch_version.x
+          version=$(semver $version -c)
+          branch_name=release-$(echo $version | grep -oP '[0-9]+.[0-9]+').x
 
           git checkout -b $branch_name
           git push --set-upstream origin $branch_name
