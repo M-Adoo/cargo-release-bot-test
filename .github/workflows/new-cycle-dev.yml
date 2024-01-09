@@ -1,8 +1,8 @@
+name: "Start a new cycle of development"
 on:
   workflow_dispatch: # allows manual triggering
 permissions:
   contents: write
-name: "Start a new cycle of development"
 
 jobs:
   master_check:
@@ -32,7 +32,7 @@ jobs:
           fetch-depth: 0 # Required to count the commits
           ssh-key: ${{secrets.DEPLOY_KEY}}
       - name: Intasll semver tool
-        run: npm install --save semver
+        run: npm install -g semver
       - name: new release branch & alpha version
         run: |
           version=$(git describe --tags --abbrev=0 | grep -oP '(?<=v)\S*')
