@@ -34,6 +34,7 @@ And please only add new entries below the `Unreleased` header with the following
 
 ### FIXES
 
-<!-- next-url -->
-
 - the init alpha version fixed
+
+
+<!-- next-url -->
