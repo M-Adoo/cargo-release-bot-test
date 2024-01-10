@@ -19,7 +19,7 @@ jobs:
     with:
       level: 'beta'
       ref: ${{ github.ref }}
-      merge_changelog: false
+      merge_changelog: true
     secrets:
       CRATE_RELEASE_TOKEN: ${{ secrets.CRATE_RELEASE_TOKEN }}
       DEPLOY_KEY: ${{ secrets.PVK }}
