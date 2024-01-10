@@ -18,9 +18,9 @@ And please only add new entries below the `Unreleased` header with the following
 
 <!-- next-header -->
 
-## [@Unreleased](https://github.com/RibirX/Ribir/compare/v0.1.1-beta.1...HEAD) - @ReleaseDate
+## [@Unreleased](https://github.com/RibirX/Ribir/compare/v0.1.1...HEAD) - @ReleaseDate
 
-## [0.1.1-beta.1](https://github.com/RibirX/Ribir/compare/v0.1.1-alpha.2...v0.1.1-beta.1) - 2024-01-10
+## [0.1.1](https://github.com/RibirX/Ribir/compare/v0.1.1-rc.1...v0.1.1) - 2024-01-10
 
 ### FEATURES
 
@@ -28,8 +28,13 @@ And please only add new entries below the `Unreleased` header with the following
 
 - second alpha version
 
+- the second beta version
+
+- 0.1.1-rc.1
+
 ### FIXES
 
 - the init alpha version fixed
+
 
 <!-- next-url -->
