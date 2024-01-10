@@ -20,6 +20,9 @@ And please only add new entries below the `Unreleased` header with the following
 
 ## [@Unreleased] - @ReleaseDate
 
+### FEATURES
+
+- 0.1.1-rc.1
 
 ## [0.1.1-beta.2](https://github.com/RibirX/Ribir/compare/v0.1.1-beta.1...v0.1.1-beta.2) - 2024-01-10
 

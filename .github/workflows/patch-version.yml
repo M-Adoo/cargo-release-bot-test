@@ -26,6 +26,7 @@ jobs:
             echo "You should only run this workflow on the release branch."
             exit 1
       - uses: actions/checkout@v3
+        if: ${{ github.event.inputs.level == 'auto' }}
         with:
           fetch-depth: 0
           fetch-tags: true
@@ -35,7 +36,7 @@ jobs:
       - id: concrete_level
         run: |
           level=${{ steps.auto_detect.outputs.level }}
-          echo "level=${level:=patch}" >> $GITHUB_OUTPUT
+          echo "level=${level:=${{inputs.level}}}" >> $GITHUB_OUTPUT
   call-workflow-passing-data:
     needs: release_level
     uses: RibirX/rclog/.github/workflows/release-version.yml@main
