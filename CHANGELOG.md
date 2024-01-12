@@ -20,6 +20,8 @@ And please only add new entries below the `Unreleased` header with the following
 
 ## [@Unreleased](https://github.com/RibirX/Ribir/compare/v0.1.1...HEAD) - @ReleaseDate
 
+- test trigger workflow in another repo
+
 ## [0.1.1](https://github.com/RibirX/Ribir/compare/v0.1.1-rc.1...v0.1.1) - 2024-01-10
 
 ### FEATURES
