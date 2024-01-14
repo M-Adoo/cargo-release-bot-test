@@ -46,4 +46,4 @@ jobs:
       merge_changelog: ${{ needs.release_level.outputs.level == 'patch' }}
     secrets:
       CRATE_RELEASE_TOKEN: ${{ secrets.CRATE_RELEASE_TOKEN }}
-      DEPLOY_KEY: ${{ secrets.PVK }}
+      GITHUB_RELEASE_TOKEN: ${{ secrets.RIBIR_RELEASE }}
