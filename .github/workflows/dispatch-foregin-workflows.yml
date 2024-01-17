@@ -1,24 +1,26 @@
-name: "Dispatch foregin workflows"
+name: "Release push dispatch"
 
 on:
   workflow_dispatch:
-  release:
-    types: [published]
+  push:
+    branches:
+      - main
+      - release-*
 jobs:
   dispatch:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/github-script@v7
       with:
-        github-token: ${{ secrets.RELEASE_VERSION }}
+        github-token: ${{ secrets.RIBIR_RELEASE }}
         script: |-
           await github.rest.actions.createWorkflowDispatch({
-              owner: 'RibirX',
+              owner: 'M-Adoo',
               repo: 'ribir-website',
               workflow_id: 'sync-docs.yml',
-              ref: 'auto-deploy-ci',
+              ref: 'main',
               inputs: {
-                version: "${{ github.ref }}"
+                branch_ref: "${{ github.ref }}"
               },
           }).catch(error => error).then(response => {
             core.debug(response);
