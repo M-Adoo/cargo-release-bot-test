@@ -18,10 +18,9 @@ And please only add new entries below the `Unreleased` header with the following
 
 <!-- next-header -->
 
-## [@Unreleased] - @ReleaseDate
+## [@Unreleased](https://github.com/RibirX/Ribir/compare/v0.2.0-beta.1...HEAD) - @ReleaseDate
 
-
-## [0.2.0-alpha.1](https://github.com/RibirX/Ribir/compare/v0.1.1...v0.2.0-alpha.1) - 2024-01-18
+## [0.2.0-beta.1](https://github.com/RibirX/Ribir/compare/v0.2.0-alpha.1...v0.2.0-beta.1) - 2024-01-18
 
 - test trigger workflow in another repo
 
@@ -41,6 +40,4 @@ And please only add new entries below the `Unreleased` header with the following
 
 - the init alpha version fixed
 
-
 <!-- next-url -->
-[@Unreleased]: https://github.com/RibirX/Ribir/compare/v0.2.0-alpha.1...HEAD
