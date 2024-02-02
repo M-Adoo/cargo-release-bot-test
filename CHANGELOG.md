@@ -20,6 +20,9 @@ And please only add new entries below the `Unreleased` header with the following
 
 ## [@Unreleased](https://github.com/RibirX/Ribir/compare/v0.3.0-alpha.1...HEAD) - @ReleaseDate
 
+- alpha 2
+
+
 ## [0.3.0-alpha.1](https://github.com/RibirX/Ribir/compare/v0.3.0-alpha.0...v0.3.0-alpha.1) - 2024-02-02
 
 - test not merge.
