@@ -23,6 +23,8 @@ And please only add new entries below the `Unreleased` header with the following
 
 ## [0.4.0-alpha.1](https://github.com/RibirX/Ribir/compare/v0.3.0-beta.1...v0.4.0-alpha.1) - 2024-03-21
 
+- support pr replace (#pr @M-Adoo)
+
 ## [0.3.0-beta.1](https://github.com/RibirX/Ribir/compare/v0.3.0-alpha.4...v0.3.0-beta.1) - 2024-02-02
 
 - alpha 4, keep 3
