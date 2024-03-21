@@ -1,0 +1,44 @@
+name: PR Number Replace
+on:
+  pull_request:
+  merge_group:
+
+jobs:
+  replace-pr-number:
+    if: ${{ github.event_name == 'merge_group' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Replace pr number in CHANGELOG.md
+        run: |
+          git log --oneline
+          echo "current diff"
+
+          pr=$(echo ${{ github.event.merge_group.head_ref }} | grep -Eo "queue/main/pr-[0-9]+" | cut -d '-' -f2)
+          sed -i "s/#pr/#${pr}/g" ./CHANGELOG.md
+      - name: Commit and push changes
+        run: |
+          echo "event name ${{ github.event_name }}"
+          echo "pr: $pr"
+
+          echo "repo status"
+          git status
+
+          echo "check commit "
+
+          if [ $(git status --porcelain | wc -l) -eq 0 ]; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git config --global user.name "RChangelog[bot]"
+          git config --global user.email 155627257+RChangelog[bot]@users.noreply.github.com
+          git add .
+
+          echo "git diff"
+          git diff HEAD~1
+
+
+          git commit --amend --no-edit
+          git push --set-upstream origin HEAD:${{ github.event.merge_group.head_ref }}
