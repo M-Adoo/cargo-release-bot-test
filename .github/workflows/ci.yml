@@ -1,0 +1,12 @@
+name: Just test
+
+on:
+  merge_group:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - run: echo "Test"
