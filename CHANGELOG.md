@@ -14,14 +14,18 @@ There are 5 types of changes:
 
 And please only add new entries below the `Unreleased` header with the following format:
 
-    **crate**: description of change #PR @contributor
+    **crate**: description of change (#pr @contributor)
+
+Replace `@contributor` with your GitHub username. Use `#pr` for pull request number. It will be auto-filled when a pull request is made.
 
 <!-- next-header -->
 
 ## [@Unreleased] - @ReleaseDate
 
+- support pr replace (#10 @M-Adoo)
 
 ## [0.4.0-alpha.1](https://github.com/RibirX/Ribir/compare/v0.3.0-beta.1...v0.4.0-alpha.1) - 2024-03-21
+
 
 ## [0.3.0-beta.1](https://github.com/RibirX/Ribir/compare/v0.3.0-alpha.4...v0.3.0-beta.1) - 2024-02-02
 
