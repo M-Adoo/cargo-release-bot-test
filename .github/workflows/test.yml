@@ -1,0 +1,14 @@
+name: "test"
+on:
+  workflow_dispatch: # allows manual triggering
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          npm install -g semver
+          semver 0.1.1 -i patch
+
+  

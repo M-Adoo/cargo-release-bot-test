@@ -1,0 +1,29 @@
+on:
+  workflow_dispatch: # allows manual triggering
+permissions:
+  contents: write
+name: "check commits before release"
+jobs:
+  commit-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+      - run: |
+          new_commit=$(git log $(git describe --tags --abbrev=0)..HEAD --oneline | wc -l)
+          if [ $new_commit -eq 0 ]; then
+            echo "No new commits since last version"
+            exit 1
+          fi
+  call-workflow-passing-data:
+    needs: commit-check
+    uses: RibirX/rclog/.github/workflows/release-version.yml@main
+    with:
+      level: "alpha"
+      ref: ${{ github.ref }}
+      merge_changelog: false
+    secrets:
+      CRATE_RELEASE_TOKEN: ${{ secrets.CRATE_RELEASE_TOKEN }}
+      GITHUB_RELEASE_TOKEN: ${{ secrets.RIBIR_RELEASE }}
